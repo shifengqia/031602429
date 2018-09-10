@@ -6,6 +6,7 @@
 #include <string> 
 #include <regex>
 using namespace std;
+int cnt[3] = { 0 };
 bool isnum_str(char str)  //判断是否是字符或数字
 {
 	if ((str >= 'A' && str <= 'z') || (str >= '0' && str <= '9'))
@@ -19,7 +20,7 @@ void count(fstream &outfile, int *cnt)  //统计函数
 	while (outfile.getline(str, 256))
 	{
 		int tmp = 0;
-		for (int i = 0; i < strlen(str); i++)
+		for (int i = 0; i < (unsigned int )strlen(str); i++)
 		{
 			if (str[i] == ' ' || str[i] == '.' || str[i] == ',' || str[i] == '?' || str[i] == '!' || str[i] == '\n')
 				cnt[1]++;            //统计单词数
@@ -41,7 +42,7 @@ void display_map(map<string, int> &wmap);
 int main() {
 
 	char filename[256];
-	int cnt[3] = { 0 };
+	//int cnt[3] = { 0 };
 	const char *mInputFileName = "1.txt";
 	ifstream ifs(mInputFileName);
 	string mStrTemp;
@@ -56,16 +57,15 @@ int main() {
 		}
 	}
 
-
+	
 	cout << "please input your filename:" << endl; //输入要统计的文本的绝对路径
 	cin.getline(filename, 256);
 	fstream outfile(filename, ios::in);
 	count(outfile, cnt);
 	cout << "characters: " << cnt[0] << endl;
-	cout << "words:"<<endl;
+	cout << "words:";
 	display_map(mCountMap);
-	cout << endl;
-	cout << "lines:" << cnt[2] << endl;
+	//cout << "lines:" << cnt[2] << endl;
 	outfile.close();
 	system("pause");
 	return 0;
@@ -118,10 +118,11 @@ void display_map(map<string, int> &wmap)
 			}
 		}
 	}
-	cout << num;
+	cout << num << endl;
+	cout << "lines :"<< cnt[2] << endl;
 	for (j = tt; j < 10; j++)
 	{
 		cout << w[j].word  << ":"<< w[j].number << endl;
 	}
-	
+
 }
