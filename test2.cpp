@@ -62,7 +62,7 @@ int main() {
 	fstream outfile(filename, ios::in);
 	count(outfile, cnt);
 	cout << "characters: " << cnt[0] << endl;
-	cout << "words:";
+	cout << "words:"<<endl;
 	display_map(mCountMap);
 	cout << endl;
 	cout << "lines:" << cnt[2] << endl;
@@ -109,7 +109,7 @@ void display_map(map<string, int> &wmap)
 	{
 		for (i = 0; i < ttt - j; i++)
 		{
-			if (w[i].number > w[i + 1].number)
+			if (w[i].number < w[i + 1].number)
 			{
 				x = w[i].number; w[i].number = w[i + 1].number; w[i + 1].number = x;
 				strcpy(cc,w[i].word);
@@ -118,9 +118,10 @@ void display_map(map<string, int> &wmap)
 			}
 		}
 	}
+	cout << num;
 	for (j = tt; j < 10; j++)
 	{
-		cout << w[j].word << w[j].number << endl;
+		cout << w[j].word  << ":"<< w[j].number << endl;
 	}
-	cout << num;
+	
 }
