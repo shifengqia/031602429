@@ -1,3 +1,5 @@
+#define _CRT_SECURE_NO_WARNINGS
+
 #include <map>     
 #include <fstream>     
 #include <iostream>     
@@ -74,15 +76,51 @@ int main() {
 
 
 
+
+struct ww
+{
+	char word[20];
+	int number;
+}w[100];
 void display_map(map<string, int> &wmap)
 {
+
+
 	map<string, int>::const_iterator map_it;
-	int num = 0;
+	
+	
+	int i, j, num = 0;
+	int t = 0;
+	int tt=0, ttt, x = 0;
+	char  cc[20];
+	
 	for (map_it = wmap.begin(); map_it != wmap.end(); map_it++)
 	{
+
 		num += map_it->second;
-
-
+		strcpy(w[t].word,(map_it->first).c_str());
+		w[t].number = map_it->second;
+		t++;
+		
+	}
+	
+	ttt = t - 2;
+	for (j = tt; j < ttt; j++)
+	{
+		for (i = 0; i < ttt - j; i++)
+		{
+			if (w[i].number > w[i + 1].number)
+			{
+				x = w[i].number; w[i].number = w[i + 1].number; w[i + 1].number = x;
+				strcpy(cc,w[i].word);
+				strcpy(w[i].word, w[i + 1].word);
+				strcpy(w[i+1].word,cc);
+			}
+		}
+	}
+	for (j = tt; j < 10; j++)
+	{
+		cout << w[j].word << w[j].number << endl;
 	}
 	cout << num;
 }
